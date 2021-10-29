@@ -103,7 +103,7 @@ def augment_system(ode_func, n_states, n_theta):
 
     # Get symbolic representation of the ODEs by passing tensors for y, t and theta
     yhat = ode_func(t_y, t_t, t_p[n_states:])
-    if not isinstance(yhat, tt.TensorVariable):
+    if not (isinstance(yhat, tt.TensorVariable) and yhat.ndim==1):
     # Stack the results of the ode_func into a single tensor variable
         if not isinstance(yhat, (list, tuple)):
             yhat = (yhat,)
